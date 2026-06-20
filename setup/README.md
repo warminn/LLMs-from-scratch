@@ -13,6 +13,8 @@ If you already have a Python installation on your machine, the quickest way to g
 pip install -r requirements.txt
 ```
 
+The `requirements.txt` file includes platform-aware dependency markers for both Intel (`x86_64`) and Apple Silicon (`arm64`) macOS machines, so `pip` should automatically select compatible `torch` and `tensorflow` wheels when run from a native Python environment.
+
 <br>
 
 > **Note:** If you are running any of the notebooks on Google Colab and want to install the dependencies, simply run the following code in a new cell at the top of the notebook:

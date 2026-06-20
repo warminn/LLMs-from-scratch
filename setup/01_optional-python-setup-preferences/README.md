@@ -151,6 +151,8 @@ To install all required packages from a `requirements.txt` file (such as the one
 uv pip install -r requirements.txt
 ```
 
+The repository's `requirements.txt` file includes platform-aware dependency markers for Intel (`x86_64`) and Apple Silicon (`arm64`) macOS systems, so `uv pip` should automatically choose compatible `torch` and `tensorflow` wheels when your Python interpreter matches your machine architecture.
+
 
 Alternatively, install the latest dependencies directly from the repository:
 
@@ -168,6 +170,8 @@ uv pip install -r https://raw.githubusercontent.com/rasbt/LLMs-from-scratch/refs
 > `pip install -r requirements.txt`
 > or
 > `pip install -U -r https://raw.githubusercontent.com/rasbt/LLMs-from-scratch/refs/heads/main/requirements.txt`
+
+> On macOS, if `torch` or `tensorflow` installs successfully but later fails to import with an "incompatible architecture" error, double-check that your terminal, Python interpreter, and virtual environment are all running natively for the same architecture (`arm64` on Apple Silicon or `x86_64` on Intel Macs) before reinstalling the packages.
 
 &nbsp;
 

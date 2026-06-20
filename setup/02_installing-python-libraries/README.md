@@ -17,11 +17,15 @@ To install these requirements most conveniently, you can use the `requirements.t
 pip install -r requirements.txt
 ```
 
+The repository's `requirements.txt` file contains platform-aware dependency markers so that `pip` can pick compatible `torch` and `tensorflow` wheels for Intel (`x86_64`) and Apple Silicon (`arm64`) macOS systems automatically.
+
 Alternatively, you can install it via the GitHub URL as follows:
 
 ```bash
 pip install -r https://raw.githubusercontent.com/rasbt/LLMs-from-scratch/main/requirements.txt
 ```
+
+If you are on macOS and later see an "incompatible architecture" error while importing `torch` or `tensorflow`, make sure your terminal session, Python interpreter, and virtual environment all match your machine architecture before reinstalling the affected package(s).
 
 
 Then, after completing the installation, please check if all the packages are installed and are up to date using
@@ -55,6 +59,8 @@ pip install torch
 ```
 
 However, since PyTorch is a comprehensive library featuring CPU- and GPU-compatible codes, the installation may require additional settings and explanation (see the *A.1.3 Installing PyTorch in the book for more information*).
+
+Similarly, TensorFlow wheels are platform-specific, so manual reinstalls should always be done from a Python environment that matches your system architecture.
 
 It's also highly recommended to consult the installation guide menu on the official PyTorch website at [https://pytorch.org](https://pytorch.org).
 

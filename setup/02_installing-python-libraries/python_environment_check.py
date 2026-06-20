@@ -3,7 +3,8 @@
 #   - https://www.manning.com/books/build-a-large-language-model-from-scratch
 # Code: https://github.com/rasbt/LLMs-from-scratch
 
-from importlib.metadata import PackageNotFoundError, import_module, version as get_version
+from importlib import import_module
+from importlib.metadata import PackageNotFoundError, version as get_version
 from os.path import dirname, exists, join, realpath
 from packaging.version import parse as version_parse
 from packaging.requirements import Requirement
@@ -26,6 +27,12 @@ def get_packages(pkgs):
     }
     result = {}
     for p in pkgs:
+        try:
+            result[p.lower()] = get_version(p)
+            continue
+        except PackageNotFoundError:
+            pass
+
         # Determine possible module names to try.
         module_names = PACKAGE_MODULE_OVERRIDES.get(p.lower(), [p])
         version_found = None
@@ -40,7 +47,7 @@ def get_packages(pkgs):
                         version_found = None
                 if version_found is not None:
                     break  # Stop if we successfully got a version.
-            except ImportError:
+            except (ImportError, OSError):
                 # Also try replacing hyphens with underscores as a fallback.
                 alt_module = module_name.replace("-", "_")
                 if alt_module != module_name:
@@ -54,7 +61,7 @@ def get_packages(pkgs):
                                 version_found = None
                         if version_found is not None:
                             break
-                    except ImportError:
+                    except (ImportError, OSError):
                         continue
                 continue
         if version_found is None:
